@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>各mac软件下载站聚合搜索</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+<div class="wrap">
+    <div class="left">
+        <ul class="item">
+            <li class="red" data-url="index">搜索mac软件名</li>
+            <li data-url="https://foxirj.com/search/">佛系软件</li>
+            <li data-url="https://www.macat.vip/?cat=&s=">马可喵</li>
+            <li data-url="https://macwk.cn/?post_type=app&s=">macwk</li>
+            <li data-url="https://www.imacso.com/?s=">麦氪搜</li>
+            <li data-url="https://macbv.com/search/">小怪兽MAC分享屋</li>
+            <li data-url="https://www.mac8k.com/pr.jsp?keyword=">mac8k</li>
+            <li data-url="https://xclient.info/search/s/">xclient</li>
+        </ul>
+    </div>
+    <div class="right">
+        <div class="first center"><h2>各mac软件下载站聚合搜索</h2><input type="text" id="text" placeholder="请先输入mac软件名回车"/><p>本站由moonway制作，并在github开源</p></div>
+        <div class="web"><iframe id="web" src=""></iframe></div>
+    </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    let word = '';
+    $("#text").keydown(function(e) {
+        if(e.which == 13) {
+            // 阻止默认行为（如提交表单等）
+            e.preventDefault();
+            // 在这里写下你希望在回车时执行的操作
+            word = $('#text').val();
+            $(".item li").eq(1).addClass('red').siblings().removeClass('red');
+            $('.first').hide();
+            jump('https://foxirj.com/search/',word);
+            $('.web').fadeIn();
+        }
+    });
+    $('.item li').click(function(e){
+        $(this).addClass('red').siblings().removeClass('red');
+        var url = $(this).data("url");
+        if(url == "index"){
+            $('.first').fadeIn();
+            $('.web').hide();
+        }else{
+            $('.first').hide();
+            jump(url,word);
+            $('.web').fadeIn();
+        }
+    })
+    function jump(url,word){
+        var jumpUrl = url;
+        var jumpWord = word;
+        var fullUrl = jumpUrl + jumpWord;
+        $('#web').attr('src',fullUrl);
+    }
+</script>
+</body>
+</html>
